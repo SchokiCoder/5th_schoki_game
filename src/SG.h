@@ -21,6 +21,6 @@
 
 #define SG_API_MAJOR 0
 #define SG_API_MINOR 1
-#define SG_API_PATCH 0
+#define SG_API_PATCH 1
 
 #endif // SG_SG_H

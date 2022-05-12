@@ -19,10 +19,10 @@
 #include "SG_types.h"
 #include "SG_physics.h"
 
-bool_t SG_point_within_box( SG_FPoint *pt, SG_FRect *box )
+bool_t SG_fpoint_within_frect( SG_FPoint *pt, SG_FRect *rect )
 {
-    if (pt->x > box->x && pt->x < (box->x + box->w) &&
-    	pt->y > box->y && pt->y < (box->y + box->h))
+    if (pt->x > rect->x && pt->x < (rect->x + rect->w) &&
+    	pt->y > rect->y && pt->y < (rect->y + rect->h))
 	{
 		return TRUE;
 	}
@@ -30,58 +30,126 @@ bool_t SG_point_within_box( SG_FPoint *pt, SG_FRect *box )
 	return FALSE;
 }
 
-bool_t SG_box_within_box( SG_FRect *box_1, SG_FRect *box_2 )
+bool_t SG_ipoint_within_irect( SG_IPoint *pt, SG_IRect *rect )
+{
+	if (pt->x > rect->x && pt->x < (rect->x + rect->w) &&
+    	pt->y > rect->y && pt->y < (rect->y + rect->h))
+	{
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
+bool_t SG_frect_within_frect( SG_FRect *a, SG_FRect *b )
 {
     SG_FPoint pt;
 
     // check if box 1 within box 2
-    pt.x = box_1->x;
-    pt.y = box_1->y;
+    pt.x = a->x;
+    pt.y = a->y;
 
-    if (SG_point_within_box(&pt, box_2))
+    if (SG_fpoint_within_frect(&pt, b))
 		return TRUE;
 
-	pt.x = box_1->x + box_1->w;
-    pt.y = box_1->y;
+	pt.x = a->x + a->w;
+    pt.y = a->y;
 
-    if (SG_point_within_box(&pt, box_2))
+    if (SG_fpoint_within_frect(&pt, b))
 		return TRUE;
 
-	pt.x = box_1->x;
-    pt.y = box_1->y + box_1->h;
+	pt.x = a->x;
+    pt.y = a->y + a->h;
 
-    if (SG_point_within_box(&pt, box_2))
+    if (SG_fpoint_within_frect(&pt, b))
 		return TRUE;
 
-	pt.x = box_1->x + box_1->w;
-    pt.y = box_1->y + box_1->h;
+	pt.x = a->x + a->w;
+    pt.y = a->y + a->h;
 
-    if (SG_point_within_box(&pt, box_2))
+    if (SG_fpoint_within_frect(&pt, b))
 		return TRUE;
 
 	// check if box 2 within box 1
-	pt.x = box_2->x;
-    pt.y = box_2->y;
+	pt.x = b->x;
+    pt.y = b->y;
 
-    if (SG_point_within_box(&pt, box_1))
+    if (SG_fpoint_within_frect(&pt, a))
 		return TRUE;
 
-	pt.x = box_2->x + box_1->w;
-    pt.y = box_2->y;
+	pt.x = b->x + a->w;
+    pt.y = b->y;
 
-    if (SG_point_within_box(&pt, box_1))
+    if (SG_fpoint_within_frect(&pt, a))
 		return TRUE;
 
-	pt.x = box_2->x;
-    pt.y = box_2->y + box_1->h;
+	pt.x = b->x;
+    pt.y = b->y + a->h;
 
-    if (SG_point_within_box(&pt, box_1))
+    if (SG_fpoint_within_frect(&pt, a))
 		return TRUE;
 
-	pt.x = box_2->x + box_1->w;
-    pt.y = box_2->y + box_1->h;
+	pt.x = b->x + a->w;
+    pt.y = b->y + a->h;
 
-    if (SG_point_within_box(&pt, box_1))
+    if (SG_fpoint_within_frect(&pt, a))
+		return TRUE;
+
+    return FALSE;
+}
+
+bool_t SG_irect_within_irect( SG_IRect *a, SG_IRect *b )
+{
+    SG_IPoint pt;
+
+    // check if box 1 within box 2
+    pt.x = a->x;
+    pt.y = a->y;
+
+    if (SG_ipoint_within_irect(&pt, b))
+		return TRUE;
+
+	pt.x = a->x + a->w;
+    pt.y = a->y;
+
+    if (SG_ipoint_within_irect(&pt, b))
+		return TRUE;
+
+	pt.x = a->x;
+    pt.y = a->y + a->h;
+
+    if (SG_ipoint_within_irect(&pt, b))
+		return TRUE;
+
+	pt.x = a->x + a->w;
+    pt.y = a->y + a->h;
+
+    if (SG_ipoint_within_irect(&pt, b))
+		return TRUE;
+
+	// check if box 2 within box 1
+	pt.x = b->x;
+    pt.y = b->y;
+
+    if (SG_ipoint_within_irect(&pt, a))
+		return TRUE;
+
+	pt.x = b->x + a->w;
+    pt.y = b->y;
+
+    if (SG_ipoint_within_irect(&pt, a))
+		return TRUE;
+
+	pt.x = b->x;
+    pt.y = b->y + a->h;
+
+    if (SG_ipoint_within_irect(&pt, a))
+		return TRUE;
+
+	pt.x = b->x + a->w;
+    pt.y = b->y + a->h;
+
+    if (SG_ipoint_within_irect(&pt, a))
 		return TRUE;
 
     return FALSE;

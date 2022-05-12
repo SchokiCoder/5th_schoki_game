@@ -91,7 +91,8 @@ SG_World SG_World_from_file( const char *filepath )
 	// read blocks
 	for (ul32_t x = 0; x < world.width; x++)
 		for (ul32_t y = 0; y < world.height; y++)
-			fread(world.blocks[x][y], sizeof(world.blocks[x][y][0]), world.depth, f);
+			for (ul32_t z = 0; z < world.depth; z++)
+				fread(&world.blocks[x][y][z], sizeof(world.blocks[x][y][z]), 1, f);
 
 	// read entitites
 	for (size_t i = 0; i < world.ent_count; i++)
@@ -135,7 +136,8 @@ void SG_World_write( SG_World *world, const char *filepath )
 	// write blocks
     for (ul32_t x = 0; x < world->width; x++)
     	for (ul32_t y = 0; y < world->height; y++)
-			fwrite(world->blocks[x][y], sizeof(world->blocks[x][y][0]), world->depth, f);
+    		for (ul32_t z = 0; z < world->depth; z++)
+				fwrite(&world->blocks[x][y][z], sizeof(world->blocks[x][y][z]), 1, f);
 
     // write entities
     for (size_t i = 0; i < world->ent_count; i++)
