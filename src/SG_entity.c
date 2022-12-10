@@ -1,27 +1,30 @@
 /*
-	schoki_game
-	Copyright (C) 2022	Andy Frank Schoknecht
+ * schoki_game
+ * Copyright (C) 2022  Andy Frank Schoknecht
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not see
+ * <https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html>.
+ */
 
-	This program is free software: you can redistribute it and/or modify
-	it under the terms of the GNU General Public License as published by
-	the Free Software Foundation, either version 3 of the License, or
-	(at your option) any later version.
-
-	This program is distributed in the hope that it will be useful,
-	but WITHOUT ANY WARRANTY; without even the implied warranty of
-	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	GNU General Public License for more details.
-
-	You should have received a copy of the GNU General Public License
-	along with this program.  If not, see <https://www.gnu.org/licenses/>.
-*/
 /*
 #include "world.h"
 #include "entity.h"
 
-	TODO how to know which blocks are solid ?
-	block data is defined by user
-SM_bool Entity_move( Entity *ent, float *pos, float *velocity, float distance, World *world )
+// TODO how to know which blocks are solid ?
+// block data is defined by user
+SM_bool Entity_move(Entity * ent, float *pos, float *velocity, float distance,
+		    World * world)
 {
 	SM_bool collision = SM_FALSE;
 	int_fast32_t x1, y1, x2, y2;
@@ -65,10 +68,8 @@ SM_bool Entity_move( Entity *ent, float *pos, float *velocity, float distance, W
 	block_hitbox.w = world->block_size;
 	block_hitbox.h = world->block_size;
 
-	for (int_fast32_t x = x1; x <= x2; x++)
-	{
-		for (int_fast32_t y = y1; y <= y2; y++)
-		{
+	for (int_fast32_t x = x1; x <= x2; x++) {
+		for (int_fast32_t y = y1; y <= y2; y++) {
 			// if non-solid block here, skip
 			if (world->blocks[x][y] == B_NONE)
 				continue;
@@ -77,8 +78,7 @@ SM_bool Entity_move( Entity *ent, float *pos, float *velocity, float distance, W
 			block_hitbox.y = y * world->block_size;
 
 			// if collision
-			if (box_within_box(&ent->rect, &block_hitbox))
-			{
+			if (box_within_box(&ent->rect, &block_hitbox)) {
 				// flag, reset pos, kill velocity
 				collision = SM_TRUE;
 				*pos -= distance;
@@ -88,4 +88,6 @@ SM_bool Entity_move( Entity *ent, float *pos, float *velocity, float distance, W
 	}
 
 	return collision;
-}*/
+}
+*/
+
